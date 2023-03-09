@@ -1,18 +1,20 @@
 const Item = require('../models/item');
+const Category = require('../models/category');
 const { body, validationResult } = require('express-validator');
 
-exports.index = (req, res, next) => {
-  Item.findById(req.params.id)
-    .populate("category")
-    .exec((err, item) => {
-      if (err) return next(err);
-      
-      if (item == null) {
-        const error = new Error('Item not found.');
-        error.status = 404;
-        return next(error);
-      }
-      
-      res.send({ item });
+exports.get_items = (req, res, next) => {
+  Category.findOne({ name: req.query.panel })
+    .select({ name: 0, __v: 0 })
+    .catch(err => next(err))
+    .then(category => {
+      Item.find(category ? { category } : {})
+        .catch(err => next(err))
+        .then(monitors => res.send(monitors));
     });
+}
+
+exports.get_item = (req, res, next) => {
+  Item.findById(req.params.id)
+    .catch(err => next(err))
+    .then(item => res.send(item));
 }
