@@ -1,5 +1,6 @@
 import '../styles/Items.css';
 import { useEffect, useState } from "react";
+import ItemCard from './ItemCard';
 
 const Items = (props) => {
   const [items, setItems] = useState([]);
@@ -13,13 +14,11 @@ const Items = (props) => {
   }, [props.SERVER]);
   
   return (
-    <div className="items">
+    <ul className="items">
       {items.map((item, index) => {
-        return <li key={index}>
-          {item.name}
-        </li>
+        return <ItemCard key={index} item={item} />
       })}
-    </div>
+    </ul>
   );
 }
 

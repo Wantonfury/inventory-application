@@ -1,0 +1,10 @@
+.item-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+}
