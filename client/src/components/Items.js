@@ -6,10 +6,10 @@ const Items = (props) => {
   
   useEffect(() => {
     fetch(`${props.SERVER}/items`)
-      .catch(err => console.log(err))
       .then(res => res.text())
       .then(res => JSON.parse(res))
-      .then(res => setItems(res));
+      .then(res => setItems(res))
+      .catch(err => console.log(err));
   }, [props.SERVER]);
   
   return (
