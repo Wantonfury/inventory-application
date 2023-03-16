@@ -10,4 +10,6 @@ router.get('/items', itemController.get_items);
 
 router.get('/item/:id', itemController.get_item);
 
+router.post('/item/:id', itemController.set_item);
+
 module.exports = router;

@@ -1,8 +1,8 @@
 import '../styles/Items.css';
+import async from "async";
 import { useEffect, useState } from "react";
 import ItemPreview from './ItemPreview';
 import ItemCard from './ItemCard';
-import async from "async";
 
 const Items = (props) => {
   const [items, setItems] = useState([]);
@@ -42,7 +42,7 @@ const Items = (props) => {
   const renderCard = () => {
     return (
       <div className="item-cnt">
-        <ItemCard item={selectedItem} categories={categories} onClick={() => setSelectedItem(null)} />
+        <ItemCard SERVER={props.SERVER} item={selectedItem} categories={categories} onClick={() => setSelectedItem(null)} />
       </div>
     );
   }
