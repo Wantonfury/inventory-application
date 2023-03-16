@@ -15,18 +15,12 @@ const ItemCard = (props) => {
       <label htmlFor="item-modelNo">Model Number: </label>
       <input type="text" id="item-modelNo" name="modelNo" />
       
-      <fieldset>
-        <legend>Category</legend>
+      <label htmlFor="item-category">Category: </label>
+      <select id="item-category" name="category">
         {props.categories.map((category, index) => {
-          return (
-            <div key={index}>
-              <label htmlFor={`item-category-${category.name}`}>{category.name}</label>
-              <input type="checkbox" id={`item-category-${category.name}`} name="category" />
-            </div>
-          );
+          return <option key={index} value={category.name}>{category.name}</option>;
         })}
-        
-      </fieldset>
+      </select>
       
       <label htmlFor="item-stock">Stock: </label>
       <input type="text" id="item-stock" name="stock" />
