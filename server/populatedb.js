@@ -21,6 +21,7 @@ async function main() {
 
 const items = [];
 const categories = [];
+const images = [];
 
 function clearDB(cb) {
   async.parallel([
@@ -33,16 +34,8 @@ function clearDB(cb) {
   ], cb);
 }
 
-function itemCreate(name, description, brand, modelNo, category, price, stock, cb) {
-  const item = new Item({ name, description, brand, modelNo, category, price, stock });
-  
-  // item.save(err => {
-  //   if (err) return cb(err, null);
-    
-  //   console.log("New item: " + item);
-  //   items.push(item);
-  //   cb(null, item);
-  // });
+function itemCreate(name, description, brand, modelNo, category, price, stock, img, cb) {
+  const item = new Item({ name, description, brand, modelNo, category, price, stock, img });
   
   item.save()
     .then((item) => {
@@ -56,14 +49,6 @@ function itemCreate(name, description, brand, modelNo, category, price, stock, c
 function categoryCreate(name, cb) {
   const category = new Category({ name });
   
-  // category.save(err => {
-  //   if (err) return cb(err, null);
-    
-  //   console.log('New category: ' + category);
-  //   categories.push(category);
-  //   cb(null, category);
-  // });
-  
   category.save()
     .then((category) => {
       console.log('New category: ' + category);
@@ -71,6 +56,12 @@ function categoryCreate(name, cb) {
       cb(null, category);
     })
     .catch(err => cb(err, null));
+}
+
+function imageCreate(file, cb) {
+  const image = new Image({ file });
+  
+  
 }
 
 function createCategories(cb) {
@@ -98,6 +89,7 @@ function createItems(cb) {
         categories[1],
         650,
         10,
+        '',
         callback
       );
     },

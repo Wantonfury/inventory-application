@@ -1,10 +1,14 @@
 .item-card {
   display: flex;
   flex-direction: column;
-}
-
-.item-title {
-  font-size: 18px;
-  font-weight: 700;
-  text-align: left;
+  align-items: flex-start;
+  
+  align-self: center;
+  justify-self: center;
+  
+  background-color: rgb(192, 192, 192);
+  padding: 20px;
+  
+  width: 600px;
+  height: 500px;
 }

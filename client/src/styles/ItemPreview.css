@@ -1,0 +1,19 @@
+.item-preview {
+  display: flex;
+  flex-direction: column;
+  
+  cursor: pointer;
+  
+  background-color: rgb(192, 192, 192);
+  padding: 20px;
+}
+
+.item-preview:hover {
+  background-color: gray;
+}
+
+.item-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+}
