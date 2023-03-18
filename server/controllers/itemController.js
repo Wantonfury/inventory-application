@@ -44,7 +44,7 @@ exports.set_item = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     
     if (!errors.isEmpty()) {
@@ -56,7 +56,6 @@ exports.set_item = [
     }
     
     const item = new Item({
-      _id: req.params.id,
       name: req.body.name,
       description: req.body.description,
       brand: req.body.brand,
@@ -66,10 +65,22 @@ exports.set_item = [
       price: req.body.price
     });
     
-    Item.findByIdAndUpdate(req.params.id, item)
-      .catch(err => {
-        if (err) return next(err);
+    if (req.params.id) {
+      item._id = req.params.id;
+      
+      try {
+        await Item.findByIdAndUpdate(req.params.id, item);
         res.status(200).send();
-      })
+      } catch (err) {
+        return next(err);
+      }
+    } else {
+      try {
+        item.save();
+        res.status(200).send();
+      } catch (err) {
+        return next(err);
+      }
+    }
   }
 ];
