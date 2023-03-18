@@ -4,28 +4,12 @@ import { useState } from "react";
 
 const ItemCard = (props) => {
   const [errors, setErrors] = useState([]);
-  const [formValue, setFormValue] = useState({
-    name: props.item.name,
-    description: props.item.description,
-    brand: props.item.brand,
-    modelNo: props.item.modelNo,
-    category: (props.item.category ? props.item.category : props.categories[0]._id),
-    stock: props.item.stock,
-    price: props.item.price
-  });
+  const [formValue, setFormValue] = useState({ ...props.item });
   
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post(`${props.SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), {
-      "name": formValue.name,
-      "description": formValue.description,
-      "brand": formValue.brand,
-      "modelNo": formValue.modelNo,
-      "category": formValue.category,
-      "stock": formValue.stock,
-      "price": formValue.price
-    }, {
+    axios.post(`${props.SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), { ...formValue }, {
       headers: {
         ContentType: "multipart/form-data"
       }
