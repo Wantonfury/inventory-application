@@ -8,7 +8,7 @@ const ItemCard = (props) => {
     description: props.item.description,
     brand: props.item.brand,
     modelNo: props.item.modelNo,
-    category: props.item.category,
+    category: (props.item.category ? props.item.category : props.categories[0]._id),
     stock: props.item.stock,
     price: props.item.price
   });
@@ -16,7 +16,7 @@ const ItemCard = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post(`${props.SERVER}/item/${props.item._id}`, {
+    axios.post(`${props.SERVER}/item/` + (Object.keys(props.item).length > 0 ? props.item._id : ''), {
       "name": formValue.name,
       "description": formValue.description,
       "brand": formValue.brand,
@@ -29,7 +29,12 @@ const ItemCard = (props) => {
         ContentType: "multipart/form-data"
       }
     })
-      .catch(err => console.log(err));
+    .then(res => {
+      props.back();
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
   
   const handleChange = (e) => {
@@ -66,7 +71,7 @@ const ItemCard = (props) => {
       <label htmlFor="item-price">Price: </label>
       <input type="text" id="item-price" name="price" value={formValue.price} onChange={handleChange} />
       
-      <button type="submit">Change</button>
+      <button type="submit">{Object.keys(props.item).length > 0 ? 'Change' : 'Add'}</button>
     </form>
   );
 }
