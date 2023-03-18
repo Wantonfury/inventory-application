@@ -39,11 +39,13 @@ exports.set_item = [
   body("stock", "Stock must not be empty.")
     .trim()
     .isLength({ min: 1 })
-    .escape(),
+    .escape()
+    .isNumeric().withMessage("Stock must be a number."),
   body("price", "Price must not be empty.")
     .trim()
     .isLength({ min: 1 })
-    .escape(),
+    .escape()
+    .isNumeric().withMessage("Price must be a number."),
   async (req, res, next) => {
     const errors = validationResult(req);
     
@@ -51,7 +53,7 @@ exports.set_item = [
       return res.status(400).send({
         message: 'Validation error',
         body: req.body,
-        errors: errors.array().map(err => err.msg)
+        errors: errors.array({ onlyFirstError: true }).map(err => err.msg)
       });
     }
     
