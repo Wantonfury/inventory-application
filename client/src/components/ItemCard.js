@@ -34,8 +34,6 @@ const ItemCard = (props) => {
       props.back();
     })
     .catch(err => {
-      console.log(err);
-      
       setErrors(err.response.data.errors);
     });
   }
