@@ -9,7 +9,7 @@ const ItemCard = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post(`${props.SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), { ...formValue }, {
+    axios.post(`${props.SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), formValue, {
       headers: {
         ContentType: "multipart/form-data"
       }
