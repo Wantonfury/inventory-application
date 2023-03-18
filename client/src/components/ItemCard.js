@@ -16,7 +16,7 @@ const ItemCard = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post(`${props.SERVER}/item/` + (Object.keys(props.item).length > 0 ? props.item._id : ''), {
+    axios.post(`${props.SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), {
       "name": formValue.name,
       "description": formValue.description,
       "brand": formValue.brand,
@@ -71,7 +71,7 @@ const ItemCard = (props) => {
       <label htmlFor="item-price">Price: </label>
       <input type="text" id="item-price" name="price" value={formValue.price} onChange={handleChange} />
       
-      <button type="submit">{Object.keys(props.item).length > 0 ? 'Change' : 'Add'}</button>
+      <button type="submit">{props.item.name !== '' ? 'Change' : 'Add'}</button>
     </form>
   );
 }

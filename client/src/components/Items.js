@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 import ItemPreview from './ItemPreview';
 import ItemCard from './ItemCard';
 
+const dummyItem = {
+  name: '',
+  description: '',
+  brand: '',
+  modelNo: '',
+  category: '',
+  stock: '',
+  price: ''
+}
+
 const Items = (props) => {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,7 +29,7 @@ const Items = (props) => {
             .then(res => JSON.parse(res))
             .then(res => setItems(res))
             .catch(err => console.log(err));
-          cb(null, "items");
+          cb();
         },
         
         function (cb) {
@@ -28,13 +38,17 @@ const Items = (props) => {
             .then(res => JSON.parse(res))
             .then(res => setCategories(res))
             .catch(err => console.log(err));
-          cb(null, "categories");
+          cb();
         }
-      ], (err, results) => {
+      ], () => {
         setUpdateItems(false);
       });
     }
   }, [props.SERVER, updateItems]);
+  
+  useEffect(() => {
+    if (categories.length > 0) dummyItem.category = categories[0]._id
+  }, [categories]);
   
   const returnAndUpdate = () => {
     setUpdateItems(true);
@@ -47,7 +61,7 @@ const Items = (props) => {
         {items.map((item, index) => {
           return <ItemPreview key={index} item={item} onClick={() => setSelectedItem(item)} />
         })}
-        <li className="item-preview" onClick={() => setSelectedItem({})}>
+        <li className="item-preview" onClick={() => setSelectedItem(dummyItem)}>
           <p className="item-title">Create a new item</p>
         </li>
       </ul>
