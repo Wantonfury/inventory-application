@@ -40,7 +40,7 @@ const ItemCard = (props) => {
       btn.classList.remove('pos-top');
       btn.classList.add('pos-bottom');
     }
-  }, []);
+  }, [props.item._id]);
   
   return (
     <form id="item-form" className="item-card border-round" method="POST" onSubmit={handleSubmit}>
