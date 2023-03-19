@@ -86,3 +86,9 @@ exports.set_item = [
     }
   }
 ];
+
+exports.delete_item = (req, res, next) => {
+  Item.findByIdAndDelete(req.params.id)
+    .then(() => res.status(200).send())
+    .catch(err => next(err));
+}
