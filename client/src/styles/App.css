@@ -5,6 +5,8 @@
   --card-text: #0f0e17;
   --card-btn: #ff8906;
   --card-btn-hover: #ea7b00;
+  --card-btn-delete: #fffffe;
+  --card-btn-delete-hover: #e5e5e5;
 }
 
 .App {

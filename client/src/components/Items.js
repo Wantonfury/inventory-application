@@ -3,6 +3,7 @@ import async from "async";
 import { useEffect, useState } from "react";
 import ItemPreview from './ItemPreview';
 import ItemCard from './ItemCard';
+import IconDelete from '../images/icon-delete.svg';
 
 const dummyItem = {
   name: '',
@@ -55,11 +56,19 @@ const Items = (props) => {
     setSelectedItem(null);
   }
   
+  const deleteItem = (e, item) => {
+    e.stopPropagation();
+    // delete item
+    
+    if (selectedItem) setSelectedItem(null);
+    setUpdateItems(true);
+  }
+  
   const renderPreview = () => {
     return (
       <ul className="items">
         {items.map((item, index) => {
-          return <ItemPreview key={index} item={item} onClick={() => setSelectedItem(item)} />
+          return <ItemPreview key={index} item={item} onClick={() => setSelectedItem(item)} deleteItem={deleteItem} IconDelete={IconDelete} />
         })}
         <li className="item-preview border-round" onClick={() => setSelectedItem(dummyItem)}>
           <p className="item-card-title item-card-text-big">Create a new item</p>
