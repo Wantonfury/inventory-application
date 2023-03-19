@@ -1,14 +1,15 @@
 import Footer from './components/Footer';
 import Items from './components/Items';
 import './styles/App.css';
-
-const SERVER = process.env.SERVER || "http://localhost:3000";
+import ServerContext from "./contexts/serverContext";
 
 function App() {
   return (
     <div className="App">
-      <Items SERVER={SERVER} />
-      <Footer />
+      <ServerContext.Provider value={process.env.SERVER || "http://localhost:3000"}>
+        <Items />
+        <Footer />
+      </ServerContext.Provider>
     </div>
   );
 }

@@ -1,15 +1,18 @@
 import "../styles/ItemCard.css";
 import axios from "axios"
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import ServerContext from "../contexts/serverContext";
+import BtnDelete from "./BtnDelete";
 
 const ItemCard = (props) => {
   const [errors, setErrors] = useState([]);
   const [formValue, setFormValue] = useState({ ...props.item });
+  const SERVER = useContext(ServerContext);
   
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post(`${props.SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), formValue, {
+    axios.post(`${SERVER}/item/` + (props.item.name !== '' ? props.item._id : ''), formValue, {
       headers: {
         ContentType: "multipart/form-data"
       }
@@ -28,6 +31,16 @@ const ItemCard = (props) => {
       [e.target.name]: e.target.value
     });
   }
+  
+  useEffect(() => {
+    if (props.item._id) {
+      const btn = document.querySelector('#item-form .item-btn-delete');
+      
+      btn.hidden = false;
+      btn.classList.remove('pos-top');
+      btn.classList.add('pos-bottom');
+    }
+  }, []);
   
   return (
     <form id="item-form" className="item-card border-round" method="POST" onSubmit={handleSubmit}>
@@ -67,6 +80,7 @@ const ItemCard = (props) => {
       </ul>
       
       <button className="item-card-btn" type="submit">{props.item.name !== '' ? 'Change' : 'Add'}</button>
+      <BtnDelete item={props.item} back={props.back} />
     </form>
   );
 }

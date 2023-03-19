@@ -31,20 +31,3 @@
   min-width: 100%;
   margin-top: auto;
 }
-
-.item-btn-delete {
-  position: absolute;
-  background-color: var(--card-btn-delete);
-  
-  border: none;
-  cursor: pointer;
-  
-  right: 20px;
-  top: 20px;
-  
-  width: 50px;
-}
-
-.item-btn-delete:hover {
-  background-color: var(--card-btn-delete-hover);
-}

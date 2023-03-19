@@ -1,4 +1,5 @@
 import '../styles/ItemPreview.css';
+import BtnDelete from './BtnDelete';
 
 const ItemPreview = (props) => {
   const showDelete = (e) => {
@@ -12,9 +13,7 @@ const ItemPreview = (props) => {
   return (
     <li className="item-preview border-round" onClick={props.onClick} onMouseEnter={showDelete} onMouseLeave={hideDelete}>
       <p className="item-card-title item-card-text-big">{props.item.name}</p>
-      <button className="item-btn-delete" hidden={true} type="button" onClick={(e) => props.deleteItem(e, props.item)}>
-        <img src={props.IconDelete} alt="Delete item" />
-      </button>
+      <BtnDelete item={props.item} back={props.back} />
     </li>
   );
 }

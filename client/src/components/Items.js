@@ -1,10 +1,9 @@
 import '../styles/Items.css';
 import async from "async";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ItemPreview from './ItemPreview';
 import ItemCard from './ItemCard';
-import IconDelete from '../images/icon-delete.svg';
-import axios from 'axios';
+import ServerContext from "../contexts/serverContext";
 
 const dummyItem = {
   name: '',
@@ -21,12 +20,13 @@ const Items = (props) => {
   const [categories, setCategories] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [updateItems, setUpdateItems] = useState(true);
+  const SERVER = useContext(ServerContext);
   
   useEffect(() => {
     if (updateItems) {
       async.parallel([
         function (cb) {
-          fetch(`${props.SERVER}/items`)
+          fetch(`${SERVER}/items`)
             .then(res => res.text())
             .then(res => JSON.parse(res))
             .then(res => setItems(res))
@@ -35,7 +35,7 @@ const Items = (props) => {
         },
         
         function (cb) {
-          fetch(`${props.SERVER}/categories`)
+          fetch(`${SERVER}/categories`)
             .then(res => res.text())
             .then(res => JSON.parse(res))
             .then(res => setCategories(res))
@@ -46,7 +46,7 @@ const Items = (props) => {
         setUpdateItems(false);
       });
     }
-  }, [props.SERVER, updateItems]);
+  }, [SERVER, updateItems]);
   
   useEffect(() => {
     if (categories.length > 0) dummyItem.category = categories[0]._id
@@ -57,22 +57,11 @@ const Items = (props) => {
     setSelectedItem(null);
   }
   
-  const deleteItem = (e, item) => {
-    e.stopPropagation();
-    
-    axios.post(`${props.SERVER}/delete_item/${item._id}`)
-      .then(() => {
-        if (selectedItem) setSelectedItem(null);
-        setUpdateItems(true);
-      })
-      .catch(err => console.log(err));
-  }
-  
   const renderPreview = () => {
     return (
       <ul className="items">
         {items.map((item, index) => {
-          return <ItemPreview key={index} item={item} onClick={() => setSelectedItem(item)} deleteItem={deleteItem} IconDelete={IconDelete} />
+          return <ItemPreview key={index} item={item} onClick={() => setSelectedItem(item)} back={returnAndUpdate} />
         })}
         <li className="item-preview border-round" onClick={() => setSelectedItem(dummyItem)}>
           <p className="item-card-title item-card-text-big">Create a new item</p>
@@ -84,7 +73,7 @@ const Items = (props) => {
   const renderCard = () => {
     return (
       <div className="item-cnt">
-        <ItemCard SERVER={props.SERVER} item={selectedItem} categories={categories} back={returnAndUpdate} />
+        <ItemCard item={selectedItem} categories={categories} back={returnAndUpdate} />
         <button className="item-card-btn" type="button" onClick={returnAndUpdate}>Back</button>
       </div>
     );
