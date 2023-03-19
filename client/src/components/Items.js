@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ItemPreview from './ItemPreview';
 import ItemCard from './ItemCard';
 import IconDelete from '../images/icon-delete.svg';
+import axios from 'axios';
 
 const dummyItem = {
   name: '',
@@ -58,10 +59,13 @@ const Items = (props) => {
   
   const deleteItem = (e, item) => {
     e.stopPropagation();
-    // delete item
     
-    if (selectedItem) setSelectedItem(null);
-    setUpdateItems(true);
+    axios.post(`${props.SERVER}/delete_item/${item._id}`)
+      .then(() => {
+        if (selectedItem) setSelectedItem(null);
+        setUpdateItems(true);
+      })
+      .catch(err => console.log(err));
   }
   
   const renderPreview = () => {
