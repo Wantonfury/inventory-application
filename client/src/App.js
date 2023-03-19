@@ -1,3 +1,4 @@
+import Footer from './components/Footer';
 import Items from './components/Items';
 import './styles/App.css';
 
@@ -7,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <Items SERVER={SERVER} />
+      <Footer />
     </div>
   );
 }

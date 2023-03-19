@@ -1,0 +1,18 @@
+#footer {
+  display: flex;
+  
+  gap: 5px;
+  
+  margin-bottom: 20px; 
+  margin-top: auto;
+}
+
+#footer img {
+  max-width: 24px;
+  
+  transition: transform .2s;
+}
+
+#footer img:hover {
+  transform: rotateZ(360deg);
+}
