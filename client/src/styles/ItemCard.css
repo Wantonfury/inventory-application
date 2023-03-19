@@ -6,15 +6,33 @@
   align-self: center;
   justify-self: center;
   
-  background-color: rgb(192, 192, 192);
+  background-color: var(--card-background);
+  color: var(--card-text);
+  
   padding: 20px;
   gap: 25px;
   
-  width: 600px;
+  min-width: 600px;
   min-height: 500px;
   
   font-size: 16px;
   transition: all .5s;
+}
+
+.border-round {
+  border-radius: 12px;
+}
+
+.item-card-title {
+  color: var(--card-title);
+}
+
+.item-card-text {
+  color: var(--card-text);
+}
+
+.item-card-input {
+  background-color: var(--card-background);
 }
 
 .item-card-textarea {
@@ -33,4 +51,23 @@
   flex-direction: column;
   
   width: 100%;
+}
+
+.item-card-btn {
+  background-color: var(--card-btn);
+  border: none;
+  cursor: pointer;
+  
+  width: 130px;
+  height: 50px;
+  
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  
+  color: var(--card-title);
+}
+
+.item-card-btn:hover {
+  background-color: var(--card-btn-hover);
 }

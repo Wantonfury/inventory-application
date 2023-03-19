@@ -30,43 +30,43 @@ const ItemCard = (props) => {
   }
   
   return (
-    <form id="item-form" className="item-card" method="POST" onSubmit={handleSubmit}>
+    <form id="item-form" className="item-card border-round" method="POST" onSubmit={handleSubmit}>
       <div className="item-card-textarea">
-        <label htmlFor="item-name">Name: </label>
-        <textarea rows="5" id="item-name" name="name" value={formValue.name} onChange={handleChange} />
+        <label className="item-card-title" htmlFor="item-name">Name: </label>
+        <textarea className="item-card-text" rows="5" id="item-name" name="name" value={formValue.name} onChange={handleChange} />
         
-        <label htmlFor="item-description">Description: </label>
-        <textarea rows="5" id="item-description" name="description" value={formValue.description} onChange={handleChange} />
+        <label className="item-card-title" htmlFor="item-description">Description: </label>
+        <textarea className="item-card-text" rows="5" id="item-description" name="description" value={formValue.description} onChange={handleChange} />
       </div>
       
       <div className="item-card-options">
-        <label htmlFor="item-brand">Brand: </label>
-        <input type="text" id="item-brand" name="brand" value={formValue.brand} onChange={handleChange} />
+        <label className="item-card-title" htmlFor="item-brand">Brand: </label>
+        <input className="item-card-text" type="text" id="item-brand" name="brand" value={formValue.brand} onChange={handleChange} />
         
-        <label htmlFor="item-modelNo">Model Number: </label>
-        <input type="text" id="item-modelNo" name="modelNo" value={formValue.modelNo} onChange={handleChange} />
+        <label className="item-card-title" htmlFor="item-modelNo">Model Number: </label>
+        <input className="item-card-text" type="text" id="item-modelNo" name="modelNo" value={formValue.modelNo} onChange={handleChange} />
         
-        <label htmlFor="item-category">Category: </label>
+        <label className="item-card-title" htmlFor="item-category">Category: </label>
         <select id="item-category" name="category" value={formValue.category} onChange={handleChange}>
           {props.categories.map((category, index) => {
-            return <option key={index} value={category._id}>{category.name}</option>;
+            return <option className="item-card-text" key={index} value={category._id}>{category.name}</option>;
           })}
         </select>
         
-        <label htmlFor="item-stock">Stock: </label>
-        <input type="text" id="item-stock" name="stock" value={formValue.stock} onChange={handleChange} />
+        <label className="item-card-title" htmlFor="item-stock">Stock: </label>
+        <input className="item-card-text" type="text" id="item-stock" name="stock" value={formValue.stock} onChange={handleChange} />
         
-        <label htmlFor="item-price">Price: </label>
-        <input type="text" id="item-price" name="price" value={formValue.price} onChange={handleChange} />
+        <label className="item-card-title" htmlFor="item-price">Price: </label>
+        <input className="item-card-text" type="text" id="item-price" name="price" value={formValue.price} onChange={handleChange} />
       </div>
       
       <ul className="item-card-errors">
         {errors.map((error, index) => {
-          return <li key={index}>{error}</li>
+          return <li className="item-card-title" key={index}>{error}</li>
         })}
       </ul>
       
-      <button type="submit">{props.item.name !== '' ? 'Change' : 'Add'}</button>
+      <button className="item-card-btn" type="submit">{props.item.name !== '' ? 'Change' : 'Add'}</button>
     </form>
   );
 }

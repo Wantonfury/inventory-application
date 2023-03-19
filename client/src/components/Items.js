@@ -61,8 +61,8 @@ const Items = (props) => {
         {items.map((item, index) => {
           return <ItemPreview key={index} item={item} onClick={() => setSelectedItem(item)} />
         })}
-        <li className="item-preview" onClick={() => setSelectedItem(dummyItem)}>
-          <p className="item-title">Create a new item</p>
+        <li className="item-preview border-round" onClick={() => setSelectedItem(dummyItem)}>
+          <p className="item-card-title item-card-text-big">Create a new item</p>
         </li>
       </ul>
     );
@@ -72,7 +72,7 @@ const Items = (props) => {
     return (
       <div className="item-cnt">
         <ItemCard SERVER={props.SERVER} item={selectedItem} categories={categories} back={returnAndUpdate} />
-        <button type="button" onClick={returnAndUpdate}>Back</button>
+        <button className="item-card-btn" type="button" onClick={returnAndUpdate}>Back</button>
       </div>
     );
   }

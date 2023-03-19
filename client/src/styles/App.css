@@ -1,3 +1,12 @@
+:root {
+  --card-background: #0f0e17;
+  --card-background-hover: #221f34;
+  --card-title: #fffffe;
+  --card-text: #0f0e17;
+  --card-btn: #ff8906;
+  --card-btn-hover: #ea7b00;
+}
+
 .App {
   height: 100vh;
   width: 100%;

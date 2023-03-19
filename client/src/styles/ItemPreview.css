@@ -4,15 +4,15 @@
   
   cursor: pointer;
   
-  background-color: rgb(192, 192, 192);
+  background-color: var(--card-background);
   padding: 20px;
 }
 
 .item-preview:hover {
-  background-color: gray;
+  background-color: var(--card-background-hover);
 }
 
-.item-title {
+.item-card-text-big {
   font-size: 18px;
   font-weight: 700;
   text-align: left;
