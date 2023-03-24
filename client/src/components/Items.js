@@ -30,8 +30,8 @@ const Items = (props) => {
             .then(res => res.text())
             .then(res => JSON.parse(res))
             .then(res => setItems(res))
-            .catch(err => console.log(err));
-          cb();
+            .catch(err => console.log(err))
+            .finally(() => cb());
         },
         
         function (cb) {
@@ -39,8 +39,8 @@ const Items = (props) => {
             .then(res => res.text())
             .then(res => JSON.parse(res))
             .then(res => setCategories(res))
-            .catch(err => console.log(err));
-          cb();
+            .catch(err => console.log(err))
+            .finally(() => cb());
         }
       ], () => {
         setUpdateItems(false);
@@ -79,7 +79,17 @@ const Items = (props) => {
     );
   }
   
-  return selectedItem ? renderCard() : renderPreview();
+  const renderLoading = () => {
+    return (
+      <div className="items center-children">
+        <div className="item-preview border-round">
+          <p className="item-card-title item-card-text-big">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+  
+  return updateItems ? renderLoading() : (selectedItem ? renderCard() : renderPreview());
 }
 
 export default Items;
